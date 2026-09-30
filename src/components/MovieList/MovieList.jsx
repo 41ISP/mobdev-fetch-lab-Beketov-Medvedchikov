@@ -1,17 +1,18 @@
 import MovieCard from '../MovieCard/MovieCard';
 import './MovieList.css';
 
-function MovieList() {
+function MovieList({ movies = [] }) {
+  if (!movies || movies.length === 0) {
+    return <p className="movie-list__empty">Фильмы не найдены</p>;
+  }
+
   return (
     <ul className="movie-list">
-      <li><MovieCard /></li>
-      <li><MovieCard /></li>
-      <li><MovieCard /></li>
-      <li><MovieCard /></li>
-      <li><MovieCard /></li>
-      <li><MovieCard /></li>
-      <li><MovieCard /></li>
-      <li><MovieCard /></li>
+      {movies.map((movie) => (
+        <li key={movie.imdbID}>
+          <MovieCard movie={movie} />
+        </li>
+      ))}
     </ul>
   );
 }
